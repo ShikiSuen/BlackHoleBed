@@ -1,6 +1,6 @@
 # BlackHoleBed 2.0.0
 
-BlackHoleBed is an application that resides in the menu bar allowing you to tap into BlackHole channels and route them to an audio device. It was rebranded from SoundFlowerBed and is going to use BlackHole drivers instead. However, this driver is not working at this moment.
+BlackHoleBed is an application that resides in the menu bar allowing you to tap into BlackHole channels and route them to an audio device. It was rebranded from SoundFlowerBed and is going to use BlackHole drivers instead. However, this app is not working at this moment.
 
 ## Download
 
