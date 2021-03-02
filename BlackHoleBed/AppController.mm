@@ -76,7 +76,7 @@ OSStatus	DeviceListenerProc (	AudioDeviceID           inDevice,
         case kAudioDevicePropertyNominalSampleRate:
 			//printf("kAudioDevicePropertyNominalSampleRate\n");	
 			if (isInput) {
-				//printf("soundflower device potential sample rate change\n");	
+				//printf("blackhole device potential sample rate change\n");	
 				if (gThruEngine2->IsRunning() && gThruEngine2->GetInputDevice() == inDevice){
 					//[NSThread detachNewThreadSelector:@selector(srChanged2ch) toTarget:app withObject:nil];
                     [app srChanged2ch];
@@ -87,7 +87,7 @@ OSStatus	DeviceListenerProc (	AudioDeviceID           inDevice,
 			}
 			else {
 				if (inChannel == 0) {
-					//printf("non-soundflower device potential sample rate change\n");
+					//printf("non-blackhole device potential sample rate change\n");
 					if (gThruEngine2->IsRunning() && gThruEngine2->GetOutputDevice() == inDevice){
 						//[NSThread detachNewThreadSelector:@selector(srChanged2chOutput) toTarget:app withObject:nil];
                         [app srChanged2chOutput];
@@ -152,7 +152,7 @@ OSStatus	DeviceListenerProc (	AudioDeviceID           inDevice,
 			if (!isInput) {
 				if (inChannel == 0) {
 					if (gThruEngine2->GetOutputDevice() == inDevice || gThruEngine16->GetOutputDevice() == inDevice) {
-						//printf("non-soundflower device potential # of chnls change\n");
+						//printf("non-blackhole device potential # of chnls change\n");
 						//[NSThread detachNewThreadSelector:@selector(checkNchnls) toTarget:app withObject:nil];
                         [app checkNchnls];
 					}
@@ -461,11 +461,11 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 
 - (void)InstallListeners;
 {	
-	// add listeners for all devices, including soundflowers
+	// add listeners for all devices, including blackholes
 	AudioDeviceList::DeviceList &thelist = mOutputDeviceList->GetList();
 	int index = 0;
 	for (AudioDeviceList::DeviceList::iterator i = thelist.begin(); i != thelist.end(); ++i, ++index) {
-		if (0 == strncmp("Soundflower", (*i).mName, strlen("Soundflower"))) {
+		if (0 == strncmp("BlackHole", (*i).mName, strlen("BlackHole"))) {
 			//__Verify_noErr (AudioDeviceAddPropertyListener((*i).mID, 0, true, kAudioStreamPropertyPhysicalFormat, DeviceListenerProc, self));
 			//__Verify_noErr (AudioDeviceAddPropertyListener((*i).mID, 0, true, kAudioDevicePropertyStreamFormat, DeviceListenerProc, self));
 			__Verify_noErr (AudioDeviceAddPropertyListener((*i).mID, 0, true, kAudioDevicePropertyNominalSampleRate, DeviceListenerProc, self));
@@ -516,7 +516,7 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 	AudioDeviceList::DeviceList &thelist = mOutputDeviceList->GetList();
 	int index = 0;
 	for (AudioDeviceList::DeviceList::iterator i = thelist.begin(); i != thelist.end(); ++i, ++index) {
-		if (0 == strncmp("Soundflower", (*i).mName, strlen("Soundflower"))) {
+		if (0 == strncmp("BlackHole", (*i).mName, strlen("BlackHole"))) {
 			__Verify_noErr (AudioDeviceRemovePropertyListener((*i).mID, 0, true, kAudioDevicePropertyNominalSampleRate, DeviceListenerProc));
 			__Verify_noErr (AudioDeviceRemovePropertyListener((*i).mID, 0, true, kAudioDevicePropertyStreamConfiguration, DeviceListenerProc));
 		}
@@ -535,8 +535,8 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 {
 	mOutputDeviceList = NULL;
 	
-	mSoundflower2Device = 0;
-	mSoundflower16Device = 0;
+	mBlackHole2Device = 0;
+	mBlackHole16Device = 0;
 	mNchnls2 = 0;
 	mNchnls16 = 0;
 	
@@ -608,8 +608,8 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
         mMenuID2[i] = 0;
     }
 		
-	if (mSoundflower2Device) {
-		m2chMenu = [mMenu addItemWithTitle:@"Soundflower (2ch)" action:@selector(doNothing) keyEquivalent:@""];
+	if (mBlackHole2Device) {
+		m2chMenu = [mMenu addItemWithTitle:@"BlackHole (2ch)" action:@selector(doNothing) keyEquivalent:@""];
 		[m2chMenu setImage:[NSImage imageNamed:@"sf2"]];
 		[m2chMenu setTarget:self];
 			NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"2ch submenu"];
@@ -675,16 +675,16 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 		}
 	}
 	else {
-		item = [mMenu addItemWithTitle:@"Soundflower is not installed!" action:NULL keyEquivalent:@""];
+		item = [mMenu addItemWithTitle:@"BlackHole is not installed!" action:NULL keyEquivalent:@""];
 		[item setTarget:self];
 	}
 	
 	[mMenu addItem:[NSMenuItem separatorItem]];
 	
 	
-	if (mSoundflower16Device) {
+	if (mBlackHole16Device) {
 	
-		m16chMenu = [mMenu addItemWithTitle:@"Soundflower (64ch)" action:@selector(doNothing) keyEquivalent:@""];
+		m16chMenu = [mMenu addItemWithTitle:@"BlackHole (16ch)" action:@selector(doNothing) keyEquivalent:@""];
 		[m16chMenu setImage:[NSImage imageNamed:@"sf16"]];
 		[m16chMenu setTarget:self];
 			NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"16ch submenu"];
@@ -772,13 +772,13 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 	item = [mMenu addItemWithTitle:@"Audio setup" action:@selector(doAudioSetup) keyEquivalent:@""];
 	[item setTarget:self];
 	
-	item = [mMenu addItemWithTitle:@"About SoundflowerBed" action:@selector(doAbout) keyEquivalent:@""];
+	item = [mMenu addItemWithTitle:@"About BlackHoleBed" action:@selector(doAbout) keyEquivalent:@""];
 	[item setTarget:self];
     
-	// item = [mMenu addItemWithTitle:@"Hide Soundflowerbed" action:@selector(hideMenuItem) keyEquivalent:@""];
+	// item = [mMenu addItemWithTitle:@"Hide Blackholebed" action:@selector(hideMenuItem) keyEquivalent:@""];
 	// [item setTarget:self];
 	
-	item = [mMenu addItemWithTitle:@"Quit SoundflowerBed" action:@selector(doQuit) keyEquivalent:@""];
+	item = [mMenu addItemWithTitle:@"Quit BlackHoleBed" action:@selector(doQuit) keyEquivalent:@""];
 	[item setTarget:self];
 
 	[mSbItem setMenu:mMenu];
@@ -804,18 +804,18 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
         NSLog(@"----------waiting for devices");
     }
 	
-	// find soundflower devices, store and remove them from our output list
+	// find blackhole devices, store and remove them from our output list
 	AudioDeviceList::DeviceList &thelist = mOutputDeviceList->GetList();
 	int index = 0;
 	for (AudioDeviceList::DeviceList::iterator i = thelist.begin(); i != thelist.end(); ++i, ++index) {
-		if (0 == strcmp("Soundflower (2ch)", (*i).mName)) {
-			mSoundflower2Device = (*i).mID;
+		if (0 == strcmp("BlackHole 2ch", (*i).mName)) {
+			mBlackHole2Device = (*i).mID;
 			AudioDeviceList::DeviceList::iterator toerase = i;
 			i--;
 			thelist.erase(toerase);
 		}
-		else if (0 == strcmp("Soundflower (64ch)", (*i).mName)) {
-			mSoundflower16Device = (*i).mID;
+		else if (0 == strcmp("BlackHole 16ch", (*i).mName)) {
+			mBlackHole16Device = (*i).mID;
 			AudioDeviceList::DeviceList::iterator toerase = i;
 			i--;
 			thelist.erase(toerase);
@@ -824,18 +824,18 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
     
     if (restartRequired){
         NSLog(@"restarting Thru Engines");
-        if (mSoundflower2Device && mSoundflower16Device) {
+        if (mBlackHole2Device && mBlackHole16Device) {
             if(gThruEngine2){
                 delete gThruEngine2;
             }
             gThruEngine2 = new AudioThruEngine;
-            gThruEngine2->SetInputDevice(mSoundflower2Device);
+            gThruEngine2->SetInputDevice(mBlackHole2Device);
             
             if(gThruEngine16){
                 delete gThruEngine16;
             }
             gThruEngine16 = new AudioThruEngine;
-            gThruEngine16->SetInputDevice(mSoundflower16Device);
+            gThruEngine16->SetInputDevice(mBlackHole16Device);
             
             gThruEngine2->Start();
             gThruEngine16->Start();
@@ -868,12 +868,12 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 	
 	[self buildMenu];
 	
-	if (mSoundflower2Device && mSoundflower16Device) {
+	if (mBlackHole2Device && mBlackHole16Device) {
 		gThruEngine2 = new AudioThruEngine;
-		gThruEngine2->SetInputDevice(mSoundflower2Device);
+		gThruEngine2->SetInputDevice(mBlackHole2Device);
 		
 		gThruEngine16 = new AudioThruEngine;
-		gThruEngine16->SetInputDevice(mSoundflower16Device);
+		gThruEngine16->SetInputDevice(mBlackHole16Device);
 
 		gThruEngine2->Start();
 		gThruEngine16->Start();
@@ -908,7 +908,7 @@ MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageA
 	if (gThruEngine16)
 		gThruEngine16->Stop();
 		
-	if (mSoundflower2Device && mSoundflower16Device)
+	if (mBlackHole2Device && mBlackHole16Device)
 		[self writeGlobalPrefs];
 }
 

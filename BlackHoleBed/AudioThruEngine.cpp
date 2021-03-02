@@ -161,7 +161,7 @@ void	AudioThruEngine::Start()
 			return;
 		}*/
         
-        //Change SampleRate of SoundFlower sometimes crashes iTunes(might be bug of iTunes),
+        //Change SampleRate of BlackHole sometimes crashes iTunes(might be bug of iTunes),
         //so we change sample rate of output rather than input... but Some Audio I/F
         //support limited sampling rate setting,, so what should we do?
         MatchSampleRate(/*true*/false);
@@ -385,7 +385,7 @@ OSStatus AudioThruEngine::OutputIOProc (	AudioDeviceID			inDevice,
 		
 		
 		// not the most efficient, but this should handle devices with multiple streams [i think]
-		// with identitical formats [we know soundflower input channels are always one stream]
+		// with identitical formats [we know blackhole input channels are always one stream]
 		UInt32 innchnls = This->mInputDevice.mFormat.mChannelsPerFrame;
 		
 		// iSchemy's edit

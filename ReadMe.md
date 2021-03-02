@@ -1,17 +1,17 @@
-# SoundflowerBed 2.0.0
+# BlackHoleBed 2.0.0
 
-SoundflowerBed is an application that resides in the menu bar allowing you to tap into Soundflower channels and route them to an audio device.
+BlackHoleBed is an application that resides in the menu bar allowing you to tap into BlackHole channels and route them to an audio device. It was rebranded from SoundFlowerBed and is going to use BlackHole drivers instead. However, this driver is not working at this moment.
 
 ## Download
 
-Clone this project and compile SoundflowerBed using Xcode 6 or head over to the [releases page](https://github.com/mLupine/SoundflowerBed/releases) and download a compiled binary.
+Clone this project and compile BlackHoleBed using Xcode 6.
 
 ## Changelog
 
 ### 2.0.0
 
 * Updated to work on OS X 10.9, 10.10, 10.11, 10.12, 10.13, and 10.14
-* Name changed to SoundflowerBed (from Soundflowerbed)
+* Name changed to BlackHoleBed (from SoundFlowerBed)
 * New icons
 * New bundle name
 * Small bug fixes
@@ -24,10 +24,9 @@ Clone this project and compile SoundflowerBed using Xcode 6 or head over to the 
 
 * Fixed for OS X Mavericks and later on 20 December 2014, by Maciej Wilczyński (<maciej@lupine.cc>)
 
-
 ## License
 
-SoundflowerBed is licensed under the terms of the **MIT license**.  
-For details please refer to the accompanying 'License.txt' file distributed with SoundflowerBed.
+BlackHoleBed is licensed under the terms of the **MIT license**.  
+For details please refer to the accompanying 'License.txt' file distributed with BlackHoleBed.
 
 

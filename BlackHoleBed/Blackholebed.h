@@ -1,10 +1,10 @@
-/* Soundflowerbed */
+/* Blackholebed */
 
 #import <Cocoa/Cocoa.h>
 
 //#include "AudioDeviceList.h"
 
-@interface Soundflowerbed : NSObject
+@interface Blackholebed : NSObject
 {
 	
 //	AudioDeviceList *			mInputDeviceList;

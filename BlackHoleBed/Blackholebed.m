@@ -1,14 +1,14 @@
 /*	A "background" application that sits in the
 	Finder's Menu Bar.  Mostly drived from apple's
 	AudioThru example code, this allows users to tap
-	into soundflower channels and route them to an
+	into blackhole channels and route them to an
 	output device.
 */
 
 
-#import "Soundflowerbed.h"
+#import "Blackholebed.h"
 
-@implementation Soundflowerbed
+@implementation Blackholebed
 
 - (void)awakeFromNib
 {
@@ -40,7 +40,7 @@
 	[menu addItem:[NSMenuItem separatorItem]];
 	
 	
-	item = [menu addItemWithTitle:@"Soundflower Device" action:NULL keyEquivalent:@""];
+	item = [menu addItemWithTitle:@"BlackHole Device" action:NULL keyEquivalent:@""];
 	[item setTarget:self];
 	
 	item = [menu addItemWithTitle:@"2 Channel" action:@selector(doNothing) keyEquivalent:@""];
@@ -54,7 +54,7 @@
 	
 	
 	
-	item = [menu addItemWithTitle:@"Soundflower Channel Routing" action:NULL keyEquivalent:@""];
+	item = [menu addItemWithTitle:@"BlackHole Channel Routing" action:NULL keyEquivalent:@""];
 	[item setTarget:self];
 	
 	item = [menu addItemWithTitle:@"1" action:@selector(doNothing) keyEquivalent:@""];
@@ -404,10 +404,10 @@
 	
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	item = [menu addItemWithTitle:@"About Soundflowerbed..." action:@selector(doNothing) keyEquivalent:@""];
+	item = [menu addItemWithTitle:@"About Blackholebed..." action:@selector(doNothing) keyEquivalent:@""];
 	[item setTarget:self];
 	
-	item = [menu addItemWithTitle:@"Quit Soundflowerbed" action:@selector(doQuit) keyEquivalent:@""];
+	item = [menu addItemWithTitle:@"Quit Blackholebed" action:@selector(doQuit) keyEquivalent:@""];
 	[item setTarget:self];
 	
 	
